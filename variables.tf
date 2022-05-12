@@ -114,6 +114,10 @@ variable "desired_count" {
   
 }
 
+variable "force_new_deployment" {
+  
+}
+
 variable "health_health_check_grace_period_seconds" {
   
 }
@@ -123,5 +127,33 @@ variable "container_port" {
 }
 
 variable "ecs_service_subnets" {
+  
+}
+
+variable "ecs_asg_min_capacity" {
+  
+}
+
+variable "ecs_asg_max_capacity" {
+  
+}
+
+variable "ecs_asg_scaling_in_cooldown" {
+  
+}
+
+variable "ecs_asg_scaling_out_cooldown" {
+  
+}
+
+variable "ecs_asg_cpu_percent" {
+  
+}
+
+variable "ecs_asg_memory_percent" {
+  
+}
+
+variable "ecs_asg_alb_requests" {
   
 }

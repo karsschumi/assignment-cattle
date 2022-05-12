@@ -118,10 +118,6 @@ container_definitions = [
       {
           "name":"DB_PASSWORD"
           "value":"admin"
-      },
-      {
-          "name":"DB_HOST"
-          "value":"db"
       }
     ]
     logConfiguration = {
@@ -142,14 +138,30 @@ container_definitions = [
   ]
 network_mode = "awsvpc"
 
-cpu = 2048
+cpu = 256
 
-memory = 4096
+memory = 512
 
 desired_count = 1
+
+force_new_deployment = true
 
 health_health_check_grace_period_seconds = 300
 
 container_port = 8000
 
 ecs_service_subnets = ["subnet-047a4e0f9964391da","subnet-034a5b7ae165c306d"]
+
+ecs_asg_min_capacity = 2
+
+ecs_asg_max_capacity = 3
+
+ecs_asg_scaling_in_cooldown = 60
+
+ecs_asg_scaling_out_cooldown = 60
+
+ecs_asg_cpu_percent = 70
+
+ecs_asg_memory_percent = 70
+
+ecs_asg_alb_requests = 1000
