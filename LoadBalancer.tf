@@ -15,7 +15,6 @@ resource "aws_lb_target_group" "tg" {
       enabled = true
       healthy_threshold = var.tg_healthy_threshold
       interval = var.tg_healthcheck_interval
-      matcher = var.tg_healthcheck_matcher
       path = var.tg_healthcheck_path
       port = var.tg_healthcheck_port
       protocol = var.tg_healthcheck_protocol
@@ -43,7 +42,7 @@ resource "aws_security_group" "alb_sg" {
     }
 
     dynamic "ingress" {
-        for_each = var.service_ingress_rules
+        for_each = var.alb_ingress_rules
         content {
             protocol = lookup(ingress.value,"protocol",null)
             from_port = lookup(ingress.value,"from_port",null)
@@ -56,7 +55,7 @@ resource "aws_security_group" "alb_sg" {
 }
 
 ################
-# ecs  alb  #####
+# ecs  alb  ####
 ################
 
 resource "aws_lb" "lb" {
@@ -71,16 +70,16 @@ resource "aws_lb" "lb" {
 
 }
 
-#########################
-# ecs alb listener  #####
-#########################
+#####################
+# ecs alb listener  #
+#####################
 
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.lb.arn
   port              = var.aws_lb_listener_port
-  protocol          = var.aws_lb_listener_policy
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  protocol          = var.aws_lb_listener_protocol
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg.arn
   }
+}

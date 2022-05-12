@@ -7,7 +7,7 @@ resource "aws_ecs_cluster" "cluster" {
     name = format("%s-%s",var.resource_name_prefix,"cluster")
     setting {
       name = "containerInsights"
-      value = var.enable_container_insights
+      value = var.container_insights_value
     }
   
 }
@@ -29,61 +29,56 @@ resource "aws_ecs_task_definition" "task_def" {
 
 }
 
-######################
-# ecs service #####
-#####################
+# ######################
+# # ecs service #####
+# #####################
 
-resource "aws_ecs_service" "service" {
+# resource "aws_ecs_service" "service" {
    
-   name = format("%s-%s",var.resource_name_prefix,"service")
-   cluster = aws_ecs_cluster.cluster.id
-   desired_count = var.desired_count
-   health_check_grace_period_seconds = var.health_health_check_grace_period_seconds
-   launch_type = "FARGATE"
-   scheduling_strategy = "REPLICA"
-   task_definition = aws_ecs_task_definition.task_def.arn
+#    name = format("%s-%s",var.resource_name_prefix,"service")
+#    cluster = aws_ecs_cluster.cluster.id
+#    desired_count = var.desired_count
+#    health_check_grace_period_seconds = var.health_health_check_grace_period_seconds
+#    launch_type = "FARGATE"
+#    scheduling_strategy = "REPLICA"
+#    task_definition = aws_ecs_task_definition.task_def.arn
   
-  load_balancer {
-    container_name = var.container_definitions[0].name
-    container_port = var.container_port
-    target_group_arn = aws_lb_target_group.tg.arn
-  }
-  network_configuration {
-    security_groups = [aws_security_group.service_sg.id]
-    subnets = var.ecs_service_subnets
-  }
+#   load_balancer {
+#     container_name = "app"
+#     container_port = var.container_port
+#     target_group_arn = aws_lb_target_group.tg.arn
+#   }
+#   network_configuration {
+#     security_groups = [aws_security_group.service_sg.id]
+#     subnets = var.ecs_service_subnets
+#   }
 
-}
+# }
 
-##################################
-# ecs service security group #####
-##################################
+# ##################################
+# # ecs service security group #####
+# ##################################
 
-resource "aws_security_group" "service_sg" {
+# resource "aws_security_group" "service_sg" {
 
-    name = format("%s-%s",var.resource_name_prefix,"serviceSg")
-    vpc_id = var.vpc_id
+#     name = format("%s-%s",var.resource_name_prefix,"serviceSg")
+#     vpc_id = var.vpc_id
 
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
+#     egress {
+#         from_port = 0
+#         to_port = 0
+#         protocol = "-1"
+#         cidr_blocks = ["0.0.0.0/0"]
+#     }
 
-    dynamic "ingress" {
-        for_each = var.service_ingress_rules
-        content {
-            protocol = lookup(ingress.value,"protocol",null)
-            from_port = lookup(ingress.value,"from_port",null)
-            to_port = lookup(ingress.value,"to_port",null)
-            cidr_blocks = lookup(ingress.value,"cidr_blocks",null)
-            security_groups = lookup(ingress.value,"security_groups",null)
-        }
+#    ingress {
+#         from_port = 8000
+#         to_port = 8000
+#         protocol = "tcp"
+#         security_groups = [aws_security_group.alb_sg.id]
+#     }
+# }
 
-    }
-}
-
-########################
+# ########################
 
 
