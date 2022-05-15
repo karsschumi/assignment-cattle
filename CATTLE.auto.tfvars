@@ -1,14 +1,14 @@
 region = "us-east-1"
 access_key = ""
 secret_key = ""
-resource_name_prefix = "source"
+resource_name_prefix = "todoozie"
 vpc_id = "vpc-065c378168e28a6e9"
 tg_protocol = "HTTP"
 tg_port = 80
 tg_target_type = "ip"
 tg_deregistration_delay = 900
 tg_healthy_threshold = 3
-tg_healthcheck_path = "/"
+tg_healthcheck_path = "/docs"
 tg_healthcheck_port = 8000
 tg_healthcheck_protocol = "HTTP" 
 tg_healthcheck_timeout = 10

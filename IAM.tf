@@ -1,3 +1,10 @@
+terraform {
+  backend "s3" {
+    bucket = "source-tfstate-bucket"
+    key    = "cattle"
+    region = "us-east-1"
+  }
+}
 ######################
 # task Exec IAM Role #
 ######################
