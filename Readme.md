@@ -1,8 +1,17 @@
 # About the Project
 
-This Project will provision all the static resources in Amazon Webservices (AWS) cloud which you do not destroy and create very often.
+This Project will provision all the dynamic resources in Amazon WebServices (AWS) cloud which you can destroy and create very often. Hence the name Cattle.
 
+This will create the following resource
+* Application Load Balancer
+* ALB Listener
+* ALB Target Group
+* Security Groups
+* IAM Roles
+* Elastic Container Service - Task and Service
+* Scaling Policies
 
+This solution also uses terraform s3 bucket to store state files.This file contains a custom JSON format that records a mapping from the Terraform resources in your templates to the representation of those resources in the real world.
 
 &nbsp;
 
@@ -20,7 +29,7 @@ To run this solution successfully, you should follow the below steps
 You need to install terraform 13.7</br>
 </br>
 Please Visit the below link to download terraform </br>
-[Download Terraform]: https://releases.hashicorp.com/terraform/0.13.7/
+.[Download Terraform]: https://releases.hashicorp.com/terraform/0.13.7/
 
 </br>
 Please Visit the below link to install terraform </br>
@@ -67,7 +76,8 @@ If you have a suggestion that would make this better, please fork the repo and c
 &nbsp;
 
 # Acknowledgement
-[AWS VPC]: https://aws.amazon.com/vpc/features/?refid=dab92267-e340-4581-bd5d-746cf58f7be9
-[AWS ECR]: https://aws.amazon.com/ecr/
-[terraform introduction]: https://www.terraform.io/intro
+https://aws.amazon.com/alb/ </br>
+https://aws.amazon.com/iam/ </br>
+https://aws.amazon.com/ecs/</br>
+https://www.terraform.io/intro
 
