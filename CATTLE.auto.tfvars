@@ -12,7 +12,7 @@ tg_healthcheck_path = "/docs"
 tg_healthcheck_port = 8000
 tg_healthcheck_protocol = "HTTP" 
 tg_healthcheck_timeout = 10
-tg_healthcheck_threshold = 5
+tg_healthcheck_unhealthy_threshold = 5
 tg_healthcheck_interval = 120
 alb_ingress_rules = [
     {

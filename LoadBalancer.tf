@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "tg" {
       port = var.tg_healthcheck_port
       protocol = var.tg_healthcheck_protocol
       timeout = var.tg_healthcheck_timeout
-      unhealthy_threshold = var.tg_healthcheck_threshold
+      unhealthy_threshold = var.tg_healthcheck_unhealthy_threshold
 
     }
 }
